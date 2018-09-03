@@ -2,17 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout') {
+        stage('Checkout') {
                 steps {
                     echo 'Building..'
                     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/hermansen/jenkins-test.git']]])
-                    sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
                 }
             }
         stage('Build') {
             steps {
                 echo 'Building..'
-                sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+                script {
+                    sh "'${mvnHome}/bin/mvn' -Dmaven.test.failure.ignore clean package"
+                }
             }
         }
         stage('Test') {
