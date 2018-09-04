@@ -3,7 +3,7 @@ pipeline {
     def mvnHome
     stages {
         stage('Checkout') {
-                git 'https://github.com/hermansen/jenkins-test.git']]])
+                git 'https://github.com/hermansen/jenkins-test.git'
                 mvnHome = tool 'M3'
             }
         stage('Build') {
